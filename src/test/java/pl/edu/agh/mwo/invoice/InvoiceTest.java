@@ -61,6 +61,7 @@ public class InvoiceTest {
         invoice.addProduct(new OtherProduct("Piwko", new BigDecimal("10")));
         Assert.assertThat(new BigDecimal("10.30"), Matchers.comparesEqualTo(invoice.getTax()));
     }
+    //WRONG TAX DEFINED!!!!!! NOT 2.3, ITS 23!
 
     @Test
     public void testInvoiceHasProperTotalValueForManyProduct() {
