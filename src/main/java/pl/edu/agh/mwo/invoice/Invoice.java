@@ -1,7 +1,6 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,7 +34,7 @@ public class Invoice {
 
     }
 
-    public BigDecimal getSubtotal() {
+    public BigDecimal getNetPrice() {
         BigDecimal sum = BigDecimal.ZERO;
 
         sum = products.keySet().stream()
@@ -50,20 +49,19 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
-        BigDecimal sum = BigDecimal.ZERO;
-
-        sum = products.keySet().stream()
-                .map(product -> product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
+//        BigDecimal sum = BigDecimal.ZERO;
+//
+//        sum = products.keySet().stream()
+//                .map(product -> product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))))
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
 //        for (Product product : products.keySet()) {
 //            sum = sum.add(product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))));
 //        }
-
-        return sum;
+//        return sum;
+        return getGrossPrice().subtract(getNetPrice());
     }
 
-    public BigDecimal getTotal() {
+    public BigDecimal getGrossPrice() {
         BigDecimal sum = BigDecimal.ZERO;
 
         sum = products.keySet().stream()
