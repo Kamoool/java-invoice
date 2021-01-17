@@ -1,8 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.math.BigInteger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,7 +9,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
     //    private Collection<Product> products;
-    private LinkedHashMap<Product, Integer> products;
+    private Map<Product, Integer> products;
 
     public Invoice() {
 //        this.products = new ArrayList<>();
@@ -38,27 +37,43 @@ public class Invoice {
 
     public BigDecimal getSubtotal() {
         BigDecimal sum = BigDecimal.ZERO;
-        for (Product product : products.keySet()) {
-            sum = sum.add(product.getPrice().multiply(new BigDecimal(products.get(product))));
-        }
+
+        sum = products.keySet().stream()
+                .map(product -> product.getPrice().multiply(new BigDecimal(products.get(product))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+//        for (Product product : products.keySet()) {
+//            sum = sum.add(product.getPrice().multiply(BigDecimal.valueOf(products.get(product))));
+//        }
+
         return sum;
     }
 
     public BigDecimal getTax() {
         BigDecimal sum = BigDecimal.ZERO;
 
-        for (Product product : products.keySet()) {
-            sum = sum.add(product.getTaxPercent().multiply(new BigDecimal(products.get(product))).multiply(new BigDecimal(100)));
-        }
+        sum = products.keySet().stream()
+                .map(product -> product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+//        for (Product product : products.keySet()) {
+//            sum = sum.add(product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))));
+//        }
 
         return sum;
     }
 
     public BigDecimal getTotal() {
         BigDecimal sum = BigDecimal.ZERO;
-        for (Product product : products.keySet()) {
-            sum = sum.add(product.getPriceWithTax().multiply(new BigDecimal(products.get(product))));
-        }
+
+        sum = products.keySet().stream()
+                .map(product -> product.getPriceWithTax().multiply(BigDecimal.valueOf(products.get(product))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+//        for (Product product : products.keySet()) {
+//            sum = sum.add(product.getPriceWithTax().multiply(BigDecimal.valueOf(products.get(product))));
+//        }
+
         return sum;
     }
 }
