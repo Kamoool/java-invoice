@@ -58,7 +58,7 @@ public class Invoice {
 //            sum = sum.add(product.getTaxPrice().multiply(BigDecimal.valueOf(products.get(product))));
 //        }
 //        return sum;
-        return getGrossPrice().subtract(getNetPrice());
+        return this.getGrossPrice().subtract(this.getNetPrice());
     }
 
     public BigDecimal getGrossPrice() {
