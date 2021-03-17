@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -19,11 +18,6 @@ public class InvoiceTest {
     @Before
     public void createEmptyInvoiceForTheTest() {
         invoice = new Invoice();
-    }
-
-    @Test
-    public void testInvoiceNumber() {
-        Assert.assertThat(1, Matchers.comparesEqualTo(invoice.getNumber()));
     }
 
     @Test
@@ -108,5 +102,26 @@ public class InvoiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void testInvoiceWithNegativeQuantity() {
         invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
+    }
+
+    @Test
+    public void testInvoiceHasNumber() {
+        int number = invoice.getInvoiceNumber();
+        Assert.assertTrue(number > 0);
+    }
+
+    @Test
+    public void testTwoInvoicesHaveDifferentNumbers() {
+        Assert.assertNotEquals(invoice.getInvoiceNumber(), new Invoice().getInvoiceNumber());
+    }
+
+    @Test
+    public void testTheSameInvoiceHasTheSameNumber() {
+        Assert.assertEquals(invoice.getInvoiceNumber(), invoice.getInvoiceNumber());
+    }
+
+    @Test
+    public void testNextInvoicesHaveNextNumbers() {
+        Assert.assertEquals(invoice.getInvoiceNumber() + 1, new Invoice().getInvoiceNumber());
     }
 }

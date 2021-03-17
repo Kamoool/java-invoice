@@ -3,16 +3,15 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
     private Map<Product, Integer> products = new HashMap<>();
-    private int currentNumber = 0;
-    private int number;
+    private static int totalInvoicesNumber = 0;
+    private int invoiceNumber = 0;
 
     public Invoice() {
-        this.number = ++currentNumber;
+        this.invoiceNumber = totalInvoicesNumber++;
     }
 
     public void addProduct(Product product) {
@@ -48,7 +47,7 @@ public class Invoice {
         return totalGross;
     }
 
-    public int getNumber() {
-        return number;
+    public int getInvoiceNumber() {
+        return this.invoiceNumber;
     }
 }
