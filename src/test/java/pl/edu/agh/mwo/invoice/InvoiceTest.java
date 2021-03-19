@@ -133,4 +133,14 @@ public class InvoiceTest {
         Assert.assertEquals(invoice.getSummary(),sb.toString());
     }
 
+    @Test
+    public void testInvoiceSummaryOneProduct(){
+        invoice.addProduct(new DairyProduct("P1", new BigDecimal(10)),3);
+        StringBuilder sb = new StringBuilder();
+        sb.append("0\n");
+        sb.append("P1\t3\t10\n");
+        sb.append("Liczba produktów: 1");
+        Assert.assertEquals(invoice.getSummary(),sb.toString());
+    }
+
 }
