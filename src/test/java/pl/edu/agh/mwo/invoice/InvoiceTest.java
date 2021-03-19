@@ -7,10 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
-import pl.edu.agh.mwo.invoice.product.OtherProduct;
-import pl.edu.agh.mwo.invoice.product.Product;
-import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+import pl.edu.agh.mwo.invoice.product.*;
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -178,6 +175,19 @@ public class InvoiceTest {
         invoice.addProduct(p2, 5);
         invoice.addProduct(p1, 3);
         Assert.assertEquals(invoice.getProductsNumber(), 3);
+    }
+
+    @Test
+    public void testPricesProductsWithExcise() {
+        Alcohol wine1 = new Alcohol("Bottle of wine", new BigDecimal("15"));
+        Alcohol wine2 = new Alcohol("Bottle of wine", new BigDecimal("20"));
+        LiquidFuel fuel1 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
+        LiquidFuel fuel2 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
+        invoice.addProduct(wine1);
+        invoice.addProduct(wine2);
+        invoice.addProduct(fuel1);
+        invoice.addProduct(fuel2);
+        Assert.assertEquals(invoice.getGrossTotal(), new BigDecimal("311.29"));
     }
 
 }
