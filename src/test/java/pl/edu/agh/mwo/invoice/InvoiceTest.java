@@ -149,19 +149,19 @@ public class InvoiceTest {
         DairyProduct p2 = new DairyProduct("P2", new BigDecimal(7));
         DairyProduct p3 = new DairyProduct("P3", new BigDecimal(15));
         invoice.addProduct(p1, 3);
-        invoice.addProduct(p2, 5);
-        invoice.addProduct(p3, 8);
-        invoice.addProduct(p3, 8);
-        invoice.addProduct(p2, 5);
         invoice.addProduct(p1, 3);
         invoice.addProduct(p1);
+        invoice.addProduct(p2, 5);
+        invoice.addProduct(p2, 5);
         invoice.addProduct(p2);
+        invoice.addProduct(p3, 8);
+        invoice.addProduct(p3, 8);
         invoice.addProduct(p3);
         StringBuilder sb = new StringBuilder();
         sb.append("Faktura nr: " + invoice.getInvoiceNumber() + "\n");
+        sb.append("P1\t7\t10\n");
         sb.append("P2\t11\t7\n");
         sb.append("P3\t17\t15\n");
-        sb.append("P1\t7\t10\n");
         sb.append("Liczba produktów: 3");
         Assert.assertEquals(invoice.getSummary(), sb.toString());
     }
