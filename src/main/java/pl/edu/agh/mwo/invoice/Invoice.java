@@ -3,6 +3,7 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -64,7 +65,7 @@ public class Invoice {
 
     public String getSummary() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.invoiceNumber + "\n");
+        sb.append("Faktura nr: " + this.invoiceNumber + "\n");
         for (Product product : products.keySet()) {
             sb.append(product.getName() + "\t" + products.get(product) + "\t"
                     + product.getPrice() + "\n");

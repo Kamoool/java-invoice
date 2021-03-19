@@ -128,7 +128,7 @@ public class InvoiceTest {
     @Test
     public void testInvoiceSummaryEmpty() {
         StringBuilder sb = new StringBuilder();
-        sb.append(invoice.getInvoiceNumber() + "\n");
+        sb.append("Faktura nr: " + invoice.getInvoiceNumber() + "\n");
         sb.append("Liczba produktów: 0");
         Assert.assertEquals(invoice.getSummary(), sb.toString());
     }
@@ -137,7 +137,7 @@ public class InvoiceTest {
     public void testInvoiceSummaryOneProduct() {
         invoice.addProduct(new DairyProduct("P1", new BigDecimal(10)), 3);
         StringBuilder sb = new StringBuilder();
-        sb.append(invoice.getInvoiceNumber() + "\n");
+        sb.append("Faktura nr: " + invoice.getInvoiceNumber() + "\n");
         sb.append("P1\t3\t10\n");
         sb.append("Liczba produktów: 1");
         Assert.assertEquals(invoice.getSummary(), sb.toString());
@@ -158,10 +158,10 @@ public class InvoiceTest {
         invoice.addProduct(p2);
         invoice.addProduct(p3);
         StringBuilder sb = new StringBuilder();
-        sb.append(invoice.getInvoiceNumber() + "\n");
+        sb.append("Faktura nr: " + invoice.getInvoiceNumber() + "\n");
+        sb.append("P2\t11\t7\n");
         sb.append("P3\t17\t15\n");
         sb.append("P1\t7\t10\n");
-        sb.append("P2\t11\t7\n");
         sb.append("Liczba produktów: 3");
         Assert.assertEquals(invoice.getSummary(), sb.toString());
     }
