@@ -16,14 +16,22 @@ public class Invoice {
     }
 
     public void addProduct(Product product) {
-        addProduct(product, 1);
+        if (product == null)
+            throw new IllegalArgumentException();
+        if (products.containsKey(product)) {
+            products.put(product, (products.get(product) + 1));
+        } else
+            products.put(product, 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        products.put(product, quantity);
+        if (products.containsKey(product)) {
+            products.put(product, (products.get(product) + quantity));
+        } else
+            products.put(product, quantity);
     }
 
     public BigDecimal getNetTotal() {
