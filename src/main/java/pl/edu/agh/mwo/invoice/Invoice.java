@@ -3,7 +3,6 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -16,12 +15,14 @@ public class Invoice {
     }
 
     public void addProduct(Product product) {
-        if (product == null)
+        if (product == null) {
             throw new IllegalArgumentException();
+        }
         if (products.containsKey(product)) {
             products.put(product, (products.get(product) + 1));
-        } else
+        } else {
             products.put(product, 1);
+        }
     }
 
     public void addProduct(Product product, Integer quantity) {
@@ -30,8 +31,9 @@ public class Invoice {
         }
         if (products.containsKey(product)) {
             products.put(product, (products.get(product) + quantity));
-        } else
+        } else {
             products.put(product, quantity);
+        }
     }
 
     public BigDecimal getNetTotal() {
@@ -64,7 +66,8 @@ public class Invoice {
         StringBuilder sb = new StringBuilder();
         sb.append(this.invoiceNumber + "\n");
         for (Product product : products.keySet()) {
-            sb.append(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice() + "\n");
+            sb.append(product.getName() + "\t" + products.get(product) + "\t"
+                    + product.getPrice() + "\n");
         }
         sb.append("Liczba produktów: " + products.size());
 
