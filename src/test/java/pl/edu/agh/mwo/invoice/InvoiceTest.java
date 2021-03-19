@@ -177,6 +177,7 @@ public class InvoiceTest {
         invoice.addProduct(p3, 8);
         invoice.addProduct(p2, 5);
         invoice.addProduct(p1, 3);
+        Assert.assertEquals(invoice.getProductsNumber(), 3);
     }
 
 }

@@ -73,4 +73,8 @@ public class Invoice {
 
         return sb.toString();
     }
+
+    public int getProductsNumber() {
+        return products.size();
+    }
 }
