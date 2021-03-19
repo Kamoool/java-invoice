@@ -178,16 +178,18 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testPricesProductsWithExcise() {
+    public void testPricesProductsWithExciseOrdinaryDay() {
         Alcohol wine1 = new Alcohol("Bottle of wine", new BigDecimal("15"));
         Alcohol wine2 = new Alcohol("Bottle of wine", new BigDecimal("20"));
         LiquidFuel fuel1 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
         LiquidFuel fuel2 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
+        DairyProduct p1 = new DairyProduct("P1", new BigDecimal("8"));
         invoice.addProduct(wine1);
         invoice.addProduct(wine2);
         invoice.addProduct(fuel1);
         invoice.addProduct(fuel2);
-        Assert.assertEquals(invoice.getGrossTotal(), new BigDecimal("311.29"));
+        invoice.addProduct(p1);
+        Assert.assertEquals(invoice.getGrossTotal(), new BigDecimal("319.93"));
     }
 
 }
