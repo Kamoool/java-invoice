@@ -36,6 +36,10 @@ public abstract class Product {
         this.excise = excise;
     }
 
+    public BigDecimal getExcise() {
+        return excise;
+    }
+
     public String getName() {
         return name;
     }

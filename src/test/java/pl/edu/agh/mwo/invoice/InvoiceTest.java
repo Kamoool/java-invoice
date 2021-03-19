@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -184,12 +185,29 @@ public class InvoiceTest {
         LiquidFuel fuel1 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
         LiquidFuel fuel2 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
         DairyProduct p1 = new DairyProduct("P1", new BigDecimal("8"));
+        invoice.setInvoiceDate(LocalDate.parse("2021-03-19"));
         invoice.addProduct(wine1);
         invoice.addProduct(wine2);
         invoice.addProduct(fuel1);
         invoice.addProduct(fuel2);
         invoice.addProduct(p1);
         Assert.assertEquals(invoice.getGrossTotal(), new BigDecimal("319.93"));
+    }
+
+    @Test
+    public void testPricesProductsWithExciseTransportationDay() {
+        Alcohol wine1 = new Alcohol("Bottle of wine", new BigDecimal("15"));
+        Alcohol wine2 = new Alcohol("Bottle of wine", new BigDecimal("20"));
+        LiquidFuel fuel1 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
+        LiquidFuel fuel2 = new LiquidFuel("Fuel canister", new BigDecimal("100"));
+        DairyProduct p1 = new DairyProduct("P1", new BigDecimal("8"));
+        invoice.setInvoiceDate(LocalDate.parse("2021-04-26"));
+        invoice.addProduct(wine1);
+        invoice.addProduct(wine2);
+        invoice.addProduct(fuel1);
+        invoice.addProduct(fuel2);
+        invoice.addProduct(p1);
+        Assert.assertEquals(invoice.getGrossTotal(), new BigDecimal("273.93"));
     }
 
 }

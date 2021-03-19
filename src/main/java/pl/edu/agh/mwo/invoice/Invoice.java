@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -9,6 +10,7 @@ public class Invoice {
     private Map<Product, Integer> products = new LinkedHashMap<>();
     private static int totalInvoicesNumber = 0;
     private int invoiceNumber = 0;
+    public static LocalDate currentDate = LocalDate.now();
 
     public Invoice() {
         this.invoiceNumber = totalInvoicesNumber++;
@@ -76,5 +78,9 @@ public class Invoice {
 
     public int getProductsNumber() {
         return products.size();
+    }
+
+    public void setInvoiceDate(LocalDate date) {
+        Invoice.currentDate = date;
     }
 }
