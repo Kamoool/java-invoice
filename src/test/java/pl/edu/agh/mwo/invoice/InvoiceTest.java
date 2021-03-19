@@ -124,4 +124,13 @@ public class InvoiceTest {
     public void testNextInvoicesHaveNextNumbers() {
         Assert.assertEquals(invoice.getInvoiceNumber() + 1, new Invoice().getInvoiceNumber());
     }
+
+    @Test
+    public void testInvoiceSummaryEmpty(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("0\n");
+        sb.append("Liczba produktów: 0");
+        Assert.assertEquals(invoice.getSummary(),sb.toString());
+    }
+
 }

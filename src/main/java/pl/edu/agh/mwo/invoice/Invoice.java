@@ -3,6 +3,7 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -49,5 +50,16 @@ public class Invoice {
 
     public int getInvoiceNumber() {
         return this.invoiceNumber;
+    }
+
+    public String getSummary() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.invoiceNumber + "\n");
+        for (Product product : products.keySet()) {
+            sb.append(product.getName() + "\t" + products.get(product) + "\t" + product.getPrice() + "\n");
+        }
+        sb.append("Liczba produktów: " + products.size());
+
+        return sb.toString();
     }
 }
